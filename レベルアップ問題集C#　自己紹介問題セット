@@ -1,0 +1,15 @@
+using System;
+
+class MainClass {
+    public static void Main(string[] args) {
+        // 必要な情報を文字列として定義
+        string name = "KenKen"; // 任意の名前
+        string language = "C#"; // これから勉強したい言語
+        string hitokoto = "Hello, World!"; // 意気込み
+
+        // 出力フォーマットに従って表示
+        Console.WriteLine("name: " + name);
+        Console.WriteLine("language: " + language);
+        Console.WriteLine("hitokoto: " + hitokoto);
+    }
+}
