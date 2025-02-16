@@ -1,0 +1,166 @@
+// 1つのデータの入力
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // 標準入力から1行読み込む
+        string S = Console.ReadLine();
+        
+        // そのまま出力する
+        Console.WriteLine(S);
+    }
+}
+/*このコードは、標準入力から1行の文字列を読み取り、そのまま出力するシンプルなプログラムです。
+Console.ReadLine() で文字列を取得し、Console.WriteLine(S) で出力しています。*/
+
+// 1行のデータの入力
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // 標準入力から1行読み込む
+        string S = Console.ReadLine();
+        
+        // 読み込んだ文字列をそのまま出力
+        Console.WriteLine(S);
+    }
+}
+/*Console.ReadLine() で標準入力から1行の文字列を取得します。
+Console.WriteLine(S) で取得した文字列をそのまま出力します。
+注意点
+ReadLine() は末尾の改行を含まないため、そのまま WriteLine() で出力して問題ありません。*/
+
+// 3行のデータの入力
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // 標準入力から3行読み込む
+        string A = Console.ReadLine();
+        string B = Console.ReadLine();
+        string C = Console.ReadLine();
+        
+        // 読み込んだ文字列をそのまま出力
+        Console.WriteLine(A);
+        Console.WriteLine(B);
+        Console.WriteLine(C);
+    }
+}
+/*このプログラムは、標準入力から3行の文字列を読み込み、それらをそのまま3行で出力します。
+Console.ReadLine() を3回使用して各行を取得し、それぞれを Console.WriteLine() で出力しています。*/
+
+// N行のデータの入力
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // 1行目でNを取得
+        int N = int.Parse(Console.ReadLine());
+        
+        // N行の入力を読み込み、そのまま出力
+        for (int i = 0; i < N; i++)
+        {
+            string line = Console.ReadLine();
+            Console.WriteLine(line);
+        }
+    }
+}
+/*このプログラムは、最初の行でNを取得し、続くN行の文字列を順に読み込んで出力します。Console.ReadLine() を使用して入力を受け取り、ループを用いてN回処理することで、指定されたN行の文字列をそのまま出力します。*/
+
+// 3つのデータの入力
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // 標準入力から1行読み込む
+        string input = Console.ReadLine();
+        
+        // 半角スペース区切りで分割
+        string[] parts = input.Split(' ');
+        
+        // 3つの文字列を順に出力
+        foreach (string part in parts)
+        {
+            Console.WriteLine(part);
+        }
+    }
+}
+/*このプログラムは、標準入力から1行の文字列を受け取り、スペースで分割して3つの文字列を順に出力します。Split(' ') を使用して分割し、foreach ループで出力することで、柔軟に対応できるようになっています。*/
+
+// N個のデータの入力
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // 1行目でNを取得
+        int N = int.Parse(Console.ReadLine());
+        
+        // 2行目でN個の文字列を取得し、スペースで分割
+        string[] parts = Console.ReadLine().Split(' ');
+        
+        // N個の文字列を順に出力
+        foreach (string part in parts)
+        {
+            Console.WriteLine(part);
+        }
+    }
+}
+/*最初の行でNを取得し、次の行でN個の文字列をスペース区切りで取得し、それらを順番に1行ずつ出力します。Split(' ') を使用して文字列を分割し、foreach ループで出力することで簡潔に処理しています。*/
+
+// カンマ区切りの3つのデータの入力
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // 標準入力から1行読み込む
+        string input = Console.ReadLine();
+        
+        // カンマ区切りで分割
+        string[] parts = input.Split(',');
+        
+        // 3つの文字列を順に出力
+        foreach (string part in parts)
+        {
+            Console.WriteLine(part);
+        }
+    }
+}
+/*このプログラムは、標準入力からカンマ区切りの3つの文字列を取得し、それらを順に1行ずつ出力します。Split(',') を使用して文字列を分割し、foreach ループで処理することでシンプルに実装されています。*/
+
+// カンマ区切りのN個のデータの入力
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // 1行目でNを取得
+        int N = int.Parse(Console.ReadLine());
+        
+        // 2行目でN個の文字列を取得し、カンマで分割
+        string[] parts = Console.ReadLine().Split(',');
+        
+        // N個の文字列を順に出力
+        foreach (string part in parts)
+        {
+            Console.WriteLine(part);
+        }
+    }
+}
+/*最初の行でNを取得し、次の行でカンマ区切りのN個の文字列を取得し、それらを順番に1行ずつ出力します。
+Split(',') を使用して分割し、foreach ループで処理することで簡潔に実装されています。*/
+
