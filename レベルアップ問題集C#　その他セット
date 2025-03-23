@@ -1,0 +1,28 @@
+<総和の計算>75点
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // 入力を受け取る
+        string[] input = Console.ReadLine().Split();
+        ulong A = ulong.Parse(input[0]);
+        ulong B = ulong.Parse(input[1]);
+
+        // A から B までの和を求める式: (A + B) * (B - A + 1) / 2
+        ulong count = B - A + 1; // B - A + 1 を最初に計算
+        ulong sum = (A + B) * count / 2;
+
+        // 結果を出力
+        Console.WriteLine(sum);
+    }
+}
+
+/*2つの整数A, B を受け取ります。
+1からNまでの和は、N(N+1)/2で求めることができます。 また、A < B であることから A から B までの和は、 (1からBまでの和) - (1からA-1までの和) で求めることができます。
+立式を行うと、 B(B+1)/2-(A-1)A/2 となるので、式変形を行うことで、(A+B)(B-A+1)/2 を導出することができます。*/
+
+<ifを使いますか？三項演算子を使いますか？>
+
+<数の並び替え>
