@@ -1,3 +1,4 @@
+C#	Mono JIT compiler version 6.8.0.105 (Debian 6.8.0.105+dfsg-2 Wed Feb 26 23:41:24 UTC 2020)	タイムリミット5.0s メモリ制限512MB	
 <総和の計算>75点
 using System;
 
@@ -22,6 +23,145 @@ class Program
 /*2つの整数A, B を受け取ります。
 1からNまでの和は、N(N+1)/2で求めることができます。 また、A < B であることから A から B までの和は、 (1からBまでの和) - (1からA-1までの和) で求めることができます。
 立式を行うと、 B(B+1)/2-(A-1)A/2 となるので、式変形を行うことで、(A+B)(B-A+1)/2 を導出することができます。*/
+
+以下はC#5.0対応　100点
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+class Program
+{
+    static void Main()
+    {
+        string[] s = Console.ReadLine().Split();
+        BigNum A = new BigNum(s[0]);
+        BigNum B = new BigNum(s[1]);
+
+        BigNum one = new BigNum("1");
+        BigNum count = B - A + one;
+        BigNum sum = (A + B) * count / new BigNum("2");
+
+        Console.WriteLine(sum.ToString());
+    }
+}
+
+class BigNum
+{
+    const int BASE = 10000;
+    const int WIDTH = 4;
+    List<int> digits = new List<int>();
+
+    public BigNum(string s)
+    {
+        for (int i = s.Length; i > 0; i -= WIDTH)
+        {
+            int start = Math.Max(0, i - WIDTH);
+            digits.Add(int.Parse(s.Substring(start, i - start)));
+        }
+        Normalize();
+    }
+
+    public BigNum(List<int> d)
+    {
+        digits = d;
+        Normalize();
+    }
+
+    private void Normalize()
+    {
+        while (digits.Count > 1 && digits[digits.Count - 1] == 0)
+            digits.RemoveAt(digits.Count - 1);
+    }
+
+    public static BigNum operator +(BigNum a, BigNum b)
+    {
+        List<int> res = new List<int>();
+        int carry = 0, i = 0;
+        while (i < a.digits.Count || i < b.digits.Count || carry > 0)
+        {
+            int sum = carry;
+            if (i < a.digits.Count) sum += a.digits[i];
+            if (i < b.digits.Count) sum += b.digits[i];
+            res.Add(sum % BASE);
+            carry = sum / BASE;
+            i++;
+        }
+        return new BigNum(res);
+    }
+
+    public static BigNum operator -(BigNum a, BigNum b)
+    {
+        List<int> res = new List<int>();
+        int carry = 0;
+        for (int i = 0; i < a.digits.Count; i++)
+        {
+            int sub = a.digits[i] - carry - (i < b.digits.Count ? b.digits[i] : 0);
+            if (sub < 0)
+            {
+                sub += BASE;
+                carry = 1;
+            }
+            else carry = 0;
+            res.Add(sub);
+        }
+        return new BigNum(res);
+    }
+
+    public static BigNum operator *(BigNum a, BigNum b)
+    {
+        List<int> res = new List<int>(new int[a.digits.Count + b.digits.Count]);
+        for (int i = 0; i < a.digits.Count; i++)
+        {
+            for (int j = 0; j < b.digits.Count; j++)
+            {
+                long tmp = (long)a.digits[i] * b.digits[j] + res[i + j];
+                res[i + j] = (int)(tmp % BASE);
+                res[i + j + 1] += (int)(tmp / BASE);
+            }
+        }
+        return new BigNum(res);
+    }
+
+    public static BigNum operator /(BigNum a, BigNum b)
+    {
+        if (b.ToString() != "2") throw new NotSupportedException("Only division by 2 supported.");
+        List<int> res = new List<int>(a.digits);
+        int carry = 0;
+        for (int i = res.Count - 1; i >= 0; i--)
+        {
+            long cur = (long)res[i] + carry * (long)BASE;
+            res[i] = (int)(cur / 2);
+            carry = (int)(cur % 2);
+        }
+        return new BigNum(res);
+    }
+
+    public override string ToString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append(digits[digits.Count - 1]);
+        for (int i = digits.Count - 2; i >= 0; i--)
+            sb.Append(digits[i].ToString().PadLeft(WIDTH, '0'));
+        return sb.ToString();
+    }
+}
+/*【目的】
+2つの整数 A, B が与えられたとき、A + (A+1) + (A+2) + ... + B の総和を 正確に求めたい。
+制約：
+0 ≦ A ≦ B < 10^11
+つまり、答えが 10^19 を超える場合もある（ulong や long ではオーバーフロー）
+→ 多倍長整数（BigNum）を自作して計算する必要がある。
+数列 A から B までの総和は、以下の式で求まります：(A + B) * (B - A + 1) / 2
+これは、
+項数が (B - A + 1) 個あり各項の平均値が (A + B) / 2という理由から導かれる公式です。
+入力から A, B を読み取り、文字列として BigNum に変換。count = B - A + 1（項数） sum = (A + B) * count / 2（総和） 最終的な sum を文字列として表示。
+多倍長整数を 4桁単位の配列（List<int>）で表現しており、各桁は 10000 未満の整数とします。
+
+📥 new BigNum("12345678") のように作ると…
+内部的には：[5678, 1234]  // 下位桁から格納
+C# 5.0 / Mono 環境でも完全対応（BigInteger なし）
+桁数に制限なし（理論上は10^100でもいける）
+提出環境で 100点が取れるレベルの堅実な実装 */
 
 <ifを使いますか？三項演算子を使いますか？>
 
