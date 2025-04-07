@@ -1,4 +1,4 @@
-C#	Mono JIT compiler version 6.8.0.105 (Debian 6.8.0.105+dfsg-2 Wed Feb 26 23:41:24 UTC 2020)	タイムリミット5.0s メモリ制限512MB	
+C#5.0	Mono JIT compiler version 6.8.0.105 (Debian 6.8.0.105+dfsg-2 Wed Feb 26 23:41:24 UTC 2020)	タイムリミット5.0s メモリ制限512MB	
 <総和の計算>75点
 using System;
 
