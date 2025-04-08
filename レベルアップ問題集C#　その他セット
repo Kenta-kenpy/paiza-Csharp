@@ -164,5 +164,127 @@ C# 5.0 / Mono 環境でも完全対応（BigInteger なし）
 提出環境で 100点が取れるレベルの堅実な実装 */
 
 <ifを使いますか？三項演算子を使いますか？>
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // 1行目: 整数 a
+        string line1 = Console.ReadLine();
+        int a;
+        if (int.TryParse(line1, out a))
+        {
+            Console.WriteLine(a > 0 ? "plus" : line1);
+        }
+        else
+        {
+            Console.WriteLine(line1);
+        }
+
+        // 2行目: 文字列 b
+        string b = Console.ReadLine();
+        Console.WriteLine(b == "hoge" ? "yes" : b);
+
+        // 3行目: 文字列 c
+        string c = Console.ReadLine();
+        Console.WriteLine(c.Length == 10 ? "ten" : c);
+
+        // 4行目: 文字列 d
+        string d = Console.ReadLine();
+        int xIndex = d.IndexOf('x');
+        Console.WriteLine(xIndex >= 0 ? xIndex.ToString() : "nothing");
+
+        // 5行目: 文字列 e
+        string e = Console.ReadLine();
+        Console.WriteLine(e.Length == 5 ? "five" : (e.Length > 0 ? e[0].ToString() : ""));
+    }
+}
+/*このプログラムは、5行の標準入力を受け取り、それぞれに対して条件に基づいた出力を行うものです。
+C# の Console.ReadLine() を使って標準入力から1行ずつ読み込み、各行の処理を順に行います。
+line1 に標準入力の1行目（整数 a）を読み込みます。
+int.TryParse() を使って整数に変換できるかを確認しています。
+成功すれば、a に整数値が代入されます。
+a が 0 より大きければ "plus" を出力。
+そうでなければ、入力された文字列そのまま（line1）を出力。
+※ TryParse を使っているので、整数でない入力にも耐性があります。
+b に2行目の入力文字列を読み込みます。
+その文字列が "hoge" と完全一致すれば "yes" を出力。
+一致しなければ、入力された文字列をそのまま出力します。
+c に3行目の入力を読み込みます。
+c.Length == 10 で文字数が10文字ちょうどかを判定。
+10文字なら "ten" を出力。
+それ以外なら元の文字列を出力します。
+d に4行目の入力を読み込みます。
+IndexOf('x') で、**最初に出てくる 'x' の位置（インデックス）**を取得。
+'x' が見つからない場合、IndexOf は -1 を返します。
+'x' が含まれていれば、その位置（0始まり）を出力。
+含まれていなければ "nothing" を出力します。
+e に5行目の入力を読み込みます。
+e.Length == 5 でちょうど5文字なら "five" を出力。
+そうでなければ、e[0] で1文字目を取得して出力。
+文字列が空だった場合に備えて e.Length > 0 でチェックし、空なら空文字を出力します。*/
 
 <数の並び替え>
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+    public static void Main()
+    {
+        // 入力された最初の行を読み取り、nを取得
+        string line = Console.ReadLine();
+        int n = int.Parse(line);
+
+        // 数値を格納するリスト
+        List<int> numbers = new List<int>();
+
+        // n個の数値を読み取り、リストに追加
+        for (int i = 0; i < n; i++)
+        {
+            line = Console.ReadLine();
+            int number = int.Parse(line);
+            numbers.Add(number);
+        }
+
+        // 昇順にソート
+        numbers.Sort();
+
+        // 結果を1行ずつ出力
+        foreach (int num in numbers)
+        {
+            Console.WriteLine(num);
+        }
+    }
+}
+/*このプログラムは、まず最初に与えられた正の整数 n を読み取り、そのあとに続く n 個の整数を 小さい順（昇順） に並べ替えて、1行ずつ出力します。
+using System;
+標準入力・出力など基本機能を提供する System名前空間 を使うための宣言です。
+
+using System.Collections.Generic;
+List<T>（動的配列のようなコレクション）を使うために必要な名前空間です。
+
+public class Program
+Program という名前のクラスを定義しています。C#ではエントリポイント（実行開始点）を含むクラスが必要です。
+
+public static void Main()
+プログラムの実行が始まる Main メソッドです。static なのでインスタンスを作らずに呼び出されます。戻り値がないため void と書かれています。
+
+string line = Console.ReadLine();
+標準入力（キーボードやファイルなど）から1行読み取って、文字列として変数 line に格納します。
+
+int n = int.Parse(line);
+読み取った文字列を整数に変換し、変数 n に格納します。これは、後に続く数の個数（行数）を表します。
+
+List<int> numbers = new List<int>();
+整数を複数格納するためのリストを作成しています。List<int> は配列と違って要素数を後から自由に増やせます。
+
+for (int i = 0; i < n; i++)
+n 回繰り返すループです。入力された整数を順番に読み取ります
+
+numbers.Sort();
+リストの中身を 昇順（小さい順） に並べ替えます。内部的には QuickSort や IntroSort などが使われます（Mono環境によって実装は異なります）。
+
+foreach (int num in numbers)
+ソートされた整数リストの各要素を1つずつ取り出します。*/
