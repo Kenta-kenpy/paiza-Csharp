@@ -1,0 +1,40 @@
+C#5.0	Mono JIT compiler version 6.8.0.105 (Debian 6.8.0.105+dfsg-2 Wed Feb 26 23:41:24 UTC 2020)	タイムリミット5.0s メモリ制限512MB	
+2023年7月問題
+<炎上案件>
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int due = Convert.ToInt32(Console.ReadLine());
+        if (due <= 3)
+        {
+            Console.WriteLine("BOMB");
+        }
+        else
+        {
+            Console.WriteLine("ONGOING");
+        }
+    }
+}
+/*due <= 3 の場合のみ "BOMB" を出力。
+それ以外 (due > 3) の場合は "ONGOING"。
+改行や余計な空白は入れず、出力は 1 行だけ。
+Environment.Exit(0); は不要ですので削除。*/
+
+<不気味な数字>
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int n = int.Parse(Console.ReadLine());
+        int ans = n + n + n;
+        Console.WriteLine(ans);
+    }
+}
+/*string ではなく int 型で入力を受け取るようにしました。
+3 回足す処理は n + n + n で整数計算になります。
+出力は整数 ans をそのまま Console.WriteLine。*/
